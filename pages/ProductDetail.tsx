@@ -147,7 +147,7 @@ const ProductDetail: React.FC = () => {
             </button>
           </div>
 
-          {/* 折叠信息区：简洁高效 */}
+          {/* 折叠信息区 */}
           <div className="border-t border-gray-100">
             <AccordionItem title="商品描述" defaultOpen>
               {product.description}

@@ -2,6 +2,28 @@ import { Product } from '../types';
 
 const CATEGORIES = ['MK系列战甲', '反浩克装甲', '反应堆周边', '斯塔克工业'];
 
+
+const getImageUrl = (category: string, index: number) => {
+  let keyword = 'iron man armor';
+  switch (category) {
+    case 'MK系列战甲':
+      keyword = 'iron man mark suit sleek high tech';
+      break;
+    case '反浩克装甲':
+      keyword = 'hulkbuster heavy armor massive mechanical';
+      break;
+    case '反应堆周边':
+      keyword = 'arc reactor glowing chest piece prop';
+      break;
+    case '斯塔克工业':
+      keyword = 'stark industries futuristic gadget technology';
+      break;
+  }
+  
+  const prompt = encodeURIComponent(`cinematic product shot of ${keyword}, detailed, 8k, photorealistic, marvel style --seed ${index}`);
+  return `https://image.pollinations.ai/prompt/${prompt}?width=600&height=800&nodelay=true`;
+};
+
 export const generateProducts = (count: number): Product[] => {
   return Array.from({ length: count }, (_, i) => {
     const category = CATEGORIES[i % CATEGORIES.length];
@@ -10,7 +32,7 @@ export const generateProducts = (count: number): Product[] => {
       title: `${category} - 钢铁侠限定版 ${i + 1}`,
       price: Math.floor(Math.random() * 5000) + 299,
       category: category,
-      image: 'https://picx.zhimg.com/v2-53cb4f66b9c9033ca8a254d295720b0d_r.jpg',
+      image: getImageUrl(category, i),
       description: `来自斯塔克工业的顶级工艺，${category}系列 ${i + 1} 号藏品。采用纳米科技涂层，1:1完美复刻，内置微型反应堆LED灯效。致敬托尼·斯塔克的传奇人生，漫威迷不可错过的终极收藏。`,
       rating: Number((Math.random() * 2 + 3).toFixed(1)),
       reviewCount: Math.floor(Math.random() * 500) + 10,
